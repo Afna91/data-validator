@@ -23,8 +23,14 @@ public class IncomingDataServiceImpl implements IncomingDataService {
 	@Autowired
 	OutGoingRepository outGoingRepo;
 
+	@Autowired
+	public IncomingDataServiceImpl(IncomingRepository repository, OutGoingRepository outGoingRepo) {
+		this.repository = repository;
+		this.outGoingRepo = outGoingRepo;
+	}
+
 	@Override
-	public ResponseEntity<?> saveIncomingData(IncomingData incomingData) {
+	public ResponseEntity<IncomingData> saveIncomingData(IncomingData incomingData) {
 
 		IncomingData incomingDataSaved = repository.save(incomingData);
 		OutGoing outgoing = new OutGoing();
@@ -33,19 +39,20 @@ public class IncomingDataServiceImpl implements IncomingDataService {
 		outgoing.setLargestNumber(largestNumber);
 
 		String duplicate = StringOperations.findDuplicate(incomingData.getFindDuplicates());
+		//duplicate - it will include all repeating characters
 		outgoing.setDuplicate(duplicate);
 		String withOutWhiteSpace = StringOperations.removeWhiteSpace(incomingData.getWhiteSpacesGalore());
 		outgoing.setStringWithoutWhiteSpace(withOutWhiteSpace);
 		outGoingRepo.save(outgoing);
 
-		return new ResponseEntity<>("Saved incoming "+incomingDataSaved, HttpStatus.CREATED);
+		return new ResponseEntity<IncomingData>(incomingDataSaved, HttpStatus.CREATED);
 
 	}
 
 	@Override
-	public ResponseEntity<?> getOutgoing() {
+	public ResponseEntity<List<OutGoing>> getOutgoing() {
 		List<OutGoing> outGoing = outGoingRepo.findAll();
-		return new ResponseEntity<>("All Saved Outgoings : "+outGoing, HttpStatus.OK);
+		return new ResponseEntity<List<OutGoing>>(outGoing, HttpStatus.OK);
 	}
 
 }

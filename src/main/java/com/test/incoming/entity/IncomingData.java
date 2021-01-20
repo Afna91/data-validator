@@ -66,7 +66,6 @@ public class IncomingData {
 	public void setNumbersMeetNumbers(List<Integer> numbersMeetNumbers) {
 		this.numbersMeetNumbers = numbersMeetNumbers;
 	}
-
 	@Override
 	public String toString() {
 		return "IncomingData [id=" + id + ", findDuplicates=" + findDuplicates + ", whiteSpacesGalore="

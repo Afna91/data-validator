@@ -1,7 +1,6 @@
 package com.test.incoming.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,27 +13,24 @@ import com.test.incoming.service.IncomingDataService;
 @RestController
 public class IncomingDataController {
 
-	@Autowired
 	IncomingDataService service;
 
-	@PostMapping("/incoming")
-	public ResponseEntity<?> saveIncoming(@RequestBody IncomingData incomindData) {
-		try {
-			return service.saveIncomingData(incomindData);
+	@Autowired
+	public IncomingDataController(IncomingDataService service) {
+		this.service = service;
+	}
 
-		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+	@PostMapping("/incoming")
+	public ResponseEntity<IncomingData> saveIncoming(@RequestBody IncomingData incomindData) {
+
+		return service.saveIncomingData(incomindData);
 
 	}
+
 	@GetMapping("/outgoing")
 	public ResponseEntity<?> getOutgoing() {
-		try {
-			return service.getOutgoing();
 
-		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		return service.getOutgoing();
 
 	}
 
