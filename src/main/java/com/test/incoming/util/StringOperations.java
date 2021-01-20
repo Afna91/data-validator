@@ -2,9 +2,9 @@ package com.test.incoming.util;
 
 import org.springframework.stereotype.Component;
 
-@Component
+
 public class StringOperations {
-	public String findDuplicate(String input) {
+	public static String findDuplicate(String input) {
 		StringBuffer strBuffer = new StringBuffer();
 
 		char[] inp = input.toCharArray();
@@ -22,7 +22,7 @@ public class StringOperations {
 
 	}
 
-	public String removeWhiteSpace(String input) {
+	public static String removeWhiteSpace(String input) {
 		StringBuffer strBuffer = new StringBuffer();
 		String str = input;
 		char[] inp = str.toCharArray();
@@ -37,7 +37,7 @@ public class StringOperations {
 
 	}
 
-	public Boolean ifCharacterExist(String string, Character c) {
+	public static Boolean ifCharacterExist(String string, Character c) {
 
 		String str = string;
 		char[] inp = str.toCharArray();

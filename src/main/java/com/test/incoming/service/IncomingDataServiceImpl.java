@@ -23,9 +23,6 @@ public class IncomingDataServiceImpl implements IncomingDataService {
 	@Autowired
 	OutGoingRepository outGoingRepo;
 
-	@Autowired
-	StringOperations stringOperation;
-
 	@Override
 	public ResponseEntity<?> saveIncomingData(IncomingData incomingData) {
 
@@ -35,9 +32,9 @@ public class IncomingDataServiceImpl implements IncomingDataService {
 		Integer largestNumber = Collections.max(incomingData.getNumbersMeetNumbers());
 		outgoing.setLargestNumber(largestNumber);
 
-		String duplicate = stringOperation.findDuplicate(incomingData.getFindDuplicates());
+		String duplicate = StringOperations.findDuplicate(incomingData.getFindDuplicates());
 		outgoing.setDuplicate(duplicate);
-		String withOutWhiteSpace = stringOperation.removeWhiteSpace(incomingData.getWhiteSpacesGalore());
+		String withOutWhiteSpace = StringOperations.removeWhiteSpace(incomingData.getWhiteSpacesGalore());
 		outgoing.setStringWithoutWhiteSpace(withOutWhiteSpace);
 		outGoingRepo.save(outgoing);
 
