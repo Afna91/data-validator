@@ -17,11 +17,9 @@ import com.test.incoming.util.StringOperations;
 @Service
 public class IncomingDataServiceImpl implements IncomingDataService {
 
-	@Autowired
-	IncomingRepository repository;
+	private final IncomingRepository repository;
 
-	@Autowired
-	OutGoingRepository outGoingRepo;
+	private final OutGoingRepository outGoingRepo;
 
 	@Autowired
 	public IncomingDataServiceImpl(IncomingRepository repository, OutGoingRepository outGoingRepo) {
@@ -39,7 +37,7 @@ public class IncomingDataServiceImpl implements IncomingDataService {
 		outgoing.setLargestNumber(largestNumber);
 
 		String duplicate = StringOperations.findDuplicate(incomingData.getFindDuplicates());
-		//duplicate - it will include all repeating characters
+		// duplicate - it will include all repeating characters
 		outgoing.setDuplicate(duplicate);
 		String withOutWhiteSpace = StringOperations.removeWhiteSpace(incomingData.getWhiteSpacesGalore());
 		outgoing.setStringWithoutWhiteSpace(withOutWhiteSpace);
