@@ -1,4 +1,4 @@
-package com.test.incoming.serviceImpl;
+package com.test.incoming.service;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,7 +12,6 @@ import com.test.incoming.entity.IncomingData;
 import com.test.incoming.entity.OutGoing;
 import com.test.incoming.repository.IncomingRepository;
 import com.test.incoming.repository.OutGoingRepository;
-import com.test.incoming.service.IncomingDataService;
 import com.test.incoming.util.StringOperations;
 
 @Service
